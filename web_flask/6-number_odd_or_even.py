@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
- starts a Flask web application
+Starts a Flask web application
 """
 from flask import Flask, render_template
 
@@ -15,7 +15,7 @@ def hello():
 
 @app.route("/hbnb", strict_slashes=False)
 def hello_hbnb():
-    """Returns Hello HBNB!"""
+    """Returns HBNB"""
     return "HBNB"
 
 
@@ -30,27 +30,31 @@ def c_text(text):
 @app.route("/python/<text>", strict_slashes=False)
 def python_t(text="is cool"):
     """Replace underscores with spaces in the text variable"""
-    text = text.replace("_", "")
+    text = text.replace("_", " ")
     return f"Python {text}"
 
 
-@app.route("/number/<int:n>")
+@app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
-    """display “n is a number” only if n is an integer"""
+    """Display “n is a number” only if n is an integer"""
     return f"{n} is a number"
 
 
-@app.route("/number_template/<int:n>")
+@app.route("/number_template/<int:n>", strict_slashes=False)
 def numbn(n):
-    """display a HTML page only if n is an integer"""
+    """Display a HTML page only if n is an integer"""
     return render_template("5-number.html", number=n)
 
 
 @app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
 def number_odd_or_even(n):
-    """display a HTML page only if n is an integer"""
+    """Display a HTML page only if n is an integer"""
     parity = "even" if n % 2 == 0 else "odd"
-    return render_template("6-number_odd_or_even.html", number=n, parity=parity)
+    return render_template(
+        "6-number_odd_or_even.html",
+        number=n,
+        parity=parity
+    )
 
 
 if __name__ == "__main__":
