@@ -31,6 +31,8 @@ class DBStorage:
         if env == "test":
             Base.metadata.drop_all(self.__engine)
 
+        self.reload()
+
     def all(self, cls=None):
         """returns a dictionary
         Return:
@@ -78,6 +80,6 @@ class DBStorage:
         self.__session = Session()
 
     def close(self):
-        """ calls remove() method on the private session attribute
-        """
+        """ calls remove() method on the private session attribute and creates a new session """
         self.__session.remove()
+        self.reload()
